@@ -1,6 +1,20 @@
-function Project() {
+import React, { useState, useEffect, useRef } from 'react';
+
+function Project({activePrjId, projects}) {
+  const [tasks, setTasks] = useState([]);
+
+  const activeProject = projects.find((prj) => prj.id === activePrjId);
+
   return (
     <>
+      <div className="">
+        <h1 className="text-3xl font-bold text-stone-600 mb-2">{activeProject.title}</h1>
+        <button className="text-stone-600 hover:text-stone-950">Delete</button>
+      </div>
+      <p className="text-stone-600">{activeProject.description}</p>
+      {tasks.length > 0 && (
+        <h2>Tasks</h2>
+      )}
     </>
   );
 }
