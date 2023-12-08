@@ -17,12 +17,19 @@ function App() {
     setProjects((prev) => [...prev, prj]);
   };
 
+  const deleteProject = (prj) => {
+     const prjLocation = projects.findIndex((el) => el.id === prj.id);
+    const beforePrj = projects.slice(0, prjLocation);
+    const afterPrj = projects.slice(prjLocation + 1);
+    setProjects(beforePrj.concat(afterPrj));
+  };
+
   return (
     <>
       
       <main className="h-screen my-8 flex gap-8">
-        <SideBar projects={projects} setActivePrjId={setActivePrjId} addProject={addProject} />
-        <Main projects={projects} activePrjId={activePrjId} addProject={addProject} />
+        <SideBar projects={projects} setActivePrjId={setActivePrjId} addProject={addProject} deleteProject={deleteProject} />
+        <Main projects={projects} setActivePrjId={setActivePrjId} activePrjId={activePrjId} addProject={addProject} deleteProject={deleteProject} />
       </main>
       
 
