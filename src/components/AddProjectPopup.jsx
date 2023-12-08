@@ -12,13 +12,14 @@ const AddProjectPopup = forwardRef(({addProject}, ref) => {
   }));
 
   const closeAddProjectPopup = () => {
-    dialogElemm.current.close();
+    dialogElem.current.close();
   };
 
   const handleDialogueSubmit = (e) => {
     // closeAddProjectPopup();
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData);
+    e.target.reset();
     addProject({...formDataObj, id: _.uniqueId()});
   };
 
