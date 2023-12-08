@@ -1,13 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
+import _ from 'lodash';
 import { forwardRef, useImperativeHandle } from 'react';
 
-const AddProjectPopup = forwardRef(({onPopupSubmit, onPopupClose}, ref) => {
+const AddProjectPopup = forwardRef(({addProject}, ref) => {
+  const dialogElem = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    openModal() {
+      dialogElem.current.showModal();
+    }
+  }));
+
+  const closeAddProjectPopup = () => {
+    dialogElemm.current.close();
+  };
+
+  const handleDialogueSubmit = (e) => {
+    // closeAddProjectPopup();
+    const formData = new FormData(e.target);
+    const formDataObj = Object.fromEntries(formData);
+    addProject({...formDataObj, id: _.uniqueId()});
+  };
+
+
   return (
-    <dialog ref={ref} onClose={(e) => console.log('MARMUUUUU', e.type)} className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md">
-      <form className="mt-4 text-right" method="dialog" onSubmit={onPopupSubmit}>
+    <dialog ref={dialogElem} onClose={(e) => console.log('MARMUUUUU', e.type)} className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md">
+      <form className="mt-4 text-right" method="dialog" onSubmit={handleDialogueSubmit}>
         <menu className="flex items-center justify-end gap-4 my-4">
-          <li><button onClick={onPopupClose} type="button" className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Cancel</button></li>
-          <li><button>Save</button></li>
+          <li><button onClick={closeAddProjectPopup} type="button" className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Cancel</button></li>
+          <li><button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Save</button></li>
         </menu>
         <label htmlFor="title" className="text-sm font-bold uppercase text-stone-500">
           Title
@@ -34,6 +55,9 @@ const AddProjectPopup = forwardRef(({onPopupSubmit, onPopupClose}, ref) => {
 })
 
 export default AddProjectPopup;
+
+// const AddProjectPopup = forwardRef(({onPopupSubmit, onPopupClose}, ref) => {
+
 
 // onClose dialog handler:
   // console.log(evt.target)
