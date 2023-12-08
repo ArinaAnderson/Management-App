@@ -1,19 +1,9 @@
-// import _ from 'lodash';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import AddProjectPopup from './AddProjectPopup.jsx';
 
 function SideBar({projects, addProject, setActivePrjId}) {
-  /*
-  const [projects, setProjects] = useState([
-    {title: 'text Susan', description: 'ask about Renee Cosmo', id: _.uniqueId()},
-    {title: 'wipe cat shelves',  description: 'wipe shleves w solution', id: _.uniqueId()},
-  ]);
-  */
-  // const [isAddProjectPopupOpen, setIsAddProjectPopupOpen] = useState(false);
-
   const btnElem = useRef(null);
   const popupElem = useRef(null);
-
 
   const generateProjectsList = () => {
     const liElems = projects.map(({title, id}) => <li key={id} id={id}>
@@ -27,37 +17,9 @@ function SideBar({projects, addProject, setActivePrjId}) {
   };
 
   const handleAddProjectBtnClick = () => {
-    // setIsAddProjectPopupOpen(true);
-    // btnElem.current.disabled = true;
-    popupElem.current.openModal(); // API
+    popupElem.current.openModal();
   };
 
-
-  // MOVE TO POPUP
-  /*
-  const closeAddProjectPopup = () => {
-    popupElem.current.close(); // API
-    // btnElem.current.disabled = false;
-  };
-  */
-
-  /*
-  const addProject = (prj) => {
-    setProjects((prev) => [...prev, prj]);
-  };
-  */
-
-  // MOVE TO POPUP
-  /*
-  const handleDialogueSubmit = (e) => {
-    closeAddProjectPopup();
-    const formData = new FormData(e.target);
-    const formDataObj = Object.fromEntries(formData);
-    addProject({...formDataObj, id: _.uniqueId()});
-  };
-  */
-
-  
   return (
     <>
       <AddProjectPopup ref={popupElem} addProject={addProject} />
