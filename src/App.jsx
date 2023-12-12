@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // import Project from './components/Project.jsx';
 import SideBar from './components/SideBar.jsx';
 import Main from './components/Main.jsx';
+import AddProjectPopup from './components/AddProjectPopup.jsx';
 
 function App() {
   const [projects, setProjects] = useState([
@@ -26,10 +27,9 @@ function App() {
 
   return (
     <>
-      
       <main className="h-screen my-8 flex gap-8">
-        <SideBar projects={projects} setActivePrjId={setActivePrjId} addProject={addProject} deleteProject={deleteProject} />
-        <Main projects={projects} setActivePrjId={setActivePrjId} activePrjId={activePrjId} addProject={addProject} deleteProject={deleteProject} />
+        <SideBar />
+        <AddProjectPopup />
       </main>
       
 
@@ -40,3 +40,7 @@ function App() {
 export default App;
 
 // <SideBar generateList={generateProjectsList} onClickHandler={} />
+// <main className="h-screen my-8 flex gap-8">
+
+// <SideBar projects={projects} setActivePrjId={setActivePrjId} addProject={addProject} deleteProject={deleteProject} />
+
