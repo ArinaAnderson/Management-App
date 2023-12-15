@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useState, useEffect, useRef } from 'react';
 // import Project from './components/Project.jsx';
 import SideBar from './components/SideBar.jsx';
-import Main from './components/Main.jsx';
+import NoProjectSelected from './components/NoProjectSelected.jsx';
 import AddProjectPopup from './components/AddProjectPopup.jsx';
 
 function App() {
@@ -29,7 +29,8 @@ function App() {
     <>
       <main className="h-screen my-8 flex gap-8">
         <SideBar />
-        <AddProjectPopup />
+        <NoProjectSelected />
+        
       </main>
       
 
@@ -38,6 +39,8 @@ function App() {
 }
 
 export default App;
+
+// <AddProjectPopup />
 
 // <SideBar generateList={generateProjectsList} onClickHandler={} />
 // <main className="h-screen my-8 flex gap-8">
