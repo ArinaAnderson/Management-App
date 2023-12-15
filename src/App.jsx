@@ -13,7 +13,7 @@ function App() {
     */
   ]);
   const [activePrjId, setActivePrjId] = useState(null);
-  const [mainState, setMainState] = useState('no-project');
+  const [currentAction, setCurrentAction] = useState('no-project');
 
 
   const addProject = (prj) => {
@@ -21,12 +21,8 @@ function App() {
     setProjects((prev) => [...prev, prj]);
   };
 
-  const closeAddProjectPopup = () => {
-    setMainState('no-project');
-  };
-
   const changeMainState = (stateVal) => {
-    setMainState(stateVal)
+    setCurrentAction(stateVal)
   };
 
   const deleteProject = (prj) => {
@@ -42,7 +38,7 @@ function App() {
         <SideBar changeMainState={changeMainState} />
         {mainState === 'no-project'
           ? <NoProjectSelected /> 
-          : <AddProjectPopup changeMainState={changeMainState} />} 
+          : <AddProjectPopup addProject={addProject} changeMainState={changeMainState} />} 
       </main>
       
 
