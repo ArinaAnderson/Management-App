@@ -13,9 +13,20 @@ function App() {
     */
   ]);
   const [activePrjId, setActivePrjId] = useState(null);
+  const [mainState, setMainState] = useState('no-project');
+
 
   const addProject = (prj) => {
+    // setMainState('add-project');
     setProjects((prev) => [...prev, prj]);
+  };
+
+  const closeAddProjectPopup = () => {
+    setMainState('no-project');
+  };
+
+  const changeMainState = (stateVal) => {
+    setMainState(stateVal)
   };
 
   const deleteProject = (prj) => {
@@ -28,9 +39,10 @@ function App() {
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <SideBar />
-        <NoProjectSelected />
-        
+        <SideBar changeMainState={changeMainState} />
+        {mainState === 'no-project'
+          ? <NoProjectSelected /> 
+          : <AddProjectPopup changeMainState={changeMainState} />} 
       </main>
       
 

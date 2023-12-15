@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import Button from './Button.jsx';
 
-function SideBar() {
+function SideBar({changeMainState}) {
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl rounded-b-none">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">Your projects</h2>
       <div>
-        <Button>
+        <Button onClick={() =>  changeMainState('add-project')}>
         + Add Project
         </Button>
       </div>
