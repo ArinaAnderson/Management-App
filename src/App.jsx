@@ -21,7 +21,7 @@ function App() {
     setProjects((prev) => [...prev, prj]);
   };
 
-  const changeMainState = (stateVal) => {
+  const changeCurrentAction = (stateVal) => {
     setCurrentAction(stateVal)
   };
 
@@ -32,13 +32,22 @@ function App() {
     setProjects(beforePrj.concat(afterPrj));
   };
 
+  const defineMainContent = () => {
+    switch (currentAction) {
+      case 'no-project':
+        return <NoProjectSelected changeCurrentAction={changeCurrentAction} />;
+      case 'add-project':
+        return <AddProjectPopup changeCurrentAction={changeCurrentAction} />;
+      default:
+        throw new Error(`Unknown current action: '${currentAction}'!`);
+    }
+  };
+
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <SideBar changeMainState={changeMainState} />
-        {mainState === 'no-project'
-          ? <NoProjectSelected /> 
-          : <AddProjectPopup addProject={addProject} changeMainState={changeMainState} />} 
+        <SideBar changeCurrentAction={changeCurrentAction} />
+        {defineMainContent()} 
       </main>
       
 

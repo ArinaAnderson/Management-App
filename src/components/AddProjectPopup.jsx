@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { forwardRef, useImperativeHandle } from 'react';
 import Input from './Input.jsx';
 
-const AddProjectPopup = forwardRef(({addProject, changeMainState}, ref) => {
+const AddProjectPopup = forwardRef(({addProject, changeCurrentAction}, ref) => {
   const dialogElem = useRef(null);
 
   useImperativeHandle(ref, () => ({
@@ -27,7 +27,7 @@ const AddProjectPopup = forwardRef(({addProject, changeMainState}, ref) => {
 
   return  <div ref={dialogElem} className="w-[35rem] mt-16">
     <menu className="flex items-center justify-end gap-4 my-4">
-      <li><button onClick={() => changeMainState('no-project')} className="text-stone-800 hover:text-stone-950 hover:underline">Cancel</button></li>
+      <li><button onClick={() => changeCurrentAction('no-project')} className="text-stone-800 hover:text-stone-950 hover:underline">Cancel</button></li>
       <li>
         <button
           className="px-6 py-2 border-2 border-stone-800 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-100  hover:text-stone-800">
