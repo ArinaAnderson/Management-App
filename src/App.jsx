@@ -37,7 +37,7 @@ function App() {
       case 'no-project':
         return <NoProjectSelected changeCurrentAction={changeCurrentAction} />;
       case 'add-project':
-        return <AddProjectPopup changeCurrentAction={changeCurrentAction} />;
+        return <AddProjectPopup addProject={addProject} changeCurrentAction={changeCurrentAction} />;
       default:
         throw new Error(`Unknown current action: '${currentAction}'!`);
     }
@@ -46,7 +46,7 @@ function App() {
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <SideBar changeCurrentAction={changeCurrentAction} />
+        <SideBar projects={projects} changeCurrentAction={changeCurrentAction} />
         {defineMainContent()} 
       </main>
       
