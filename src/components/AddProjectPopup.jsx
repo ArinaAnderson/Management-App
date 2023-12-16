@@ -25,20 +25,53 @@ const AddProjectPopup = forwardRef(({addProject, changeCurrentAction}, ref) => {
   };
 
 
+
+  const [inputs, setInputs] = useState({
+    title: '',
+    description: '',
+    date: '',
+  });
+
+  const hadleInputChange = (e) => {
+    setInputs((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+  
+  const handleProjectSubmit = () => {
+    addProject({...inputs, id: _.uniqueId()});
+    setInputs({});
+    changeCurrentAction('no-project');
+  };
+
+  /*
+  const titleElem = useRef(null);
+  const descriptionElem = useRef(null);
+  const dateElem = useRef(null);
+
+  const inputChangeHandler = (refElem, val) => {
+    refElem.current = val;
+  };
+  */
+
   return  <div ref={dialogElem} className="w-[35rem] mt-16">
     <menu className="flex items-center justify-end gap-4 my-4">
       <li><button onClick={() => changeCurrentAction('no-project')} className="text-stone-800 hover:text-stone-950 hover:underline">Cancel</button></li>
       <li>
         <button
+          onClick={handleProjectSubmit}
           className="px-6 py-2 border-2 border-stone-800 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-100  hover:text-stone-800">
           Save
         </button>
       </li>
     </menu>
     <div>
-      <Input htmlFor='title' label='Title' type='text' textarea={false} id='title' name='title' />
-      <Input htmlFor='description' label='Description' type='text' textarea={true} id='description' name='description' />
-      <Input htmlFor='due-date' label='Due Date' type='text' textarea={false} id='due-date' name='due-date' />
+      <Input onChange={hadleInputChange} value={inputs.title.toUpperCase()} htmlFor='title' label='Title' type='text' textarea={false} id='title' name='title' />
+      <Input onChange={hadleInputChange} value={inputs.description}  htmlFor='description' label='Description' type='text' textarea={true} id='description' name='description' />
+      <Input onChange={hadleInputChange} value={inputs.date}  htmlFor='due-date' label='Due Date' type='text' textarea={false} id='due-date' name='date' />
     </div>
   </div>
 })
