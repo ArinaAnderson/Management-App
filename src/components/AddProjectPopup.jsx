@@ -25,7 +25,8 @@ const AddProjectPopup = forwardRef(({addProject, changeCurrentAction}, ref) => {
   };
 
 
-
+  /*
+  // getting Input Data by using state:
   const [inputs, setInputs] = useState({
     title: '',
     description: '',
@@ -46,16 +47,22 @@ const AddProjectPopup = forwardRef(({addProject, changeCurrentAction}, ref) => {
     setInputs({});
     changeCurrentAction('no-project');
   };
+  */
 
-  /*
   const titleElem = useRef(null);
   const descriptionElem = useRef(null);
   const dateElem = useRef(null);
 
-  const inputChangeHandler = (refElem, val) => {
-    refElem.current = val;
+  const handleProjectSubmit = () => {
+    const prjData = {
+      title: titleElem.current.value,
+      description: descriptionElem.current.value,
+      date: dateElem.current.value,
+    };
+    addProject({...prjData, id: _.uniqueId()});
+    // setInputs({});
+    changeCurrentAction('no-project');
   };
-  */
 
   return  <div ref={dialogElem} className="w-[35rem] mt-16">
     <menu className="flex items-center justify-end gap-4 my-4">
@@ -69,9 +76,9 @@ const AddProjectPopup = forwardRef(({addProject, changeCurrentAction}, ref) => {
       </li>
     </menu>
     <div>
-      <Input onChange={hadleInputChange} value={inputs.title.toUpperCase()} htmlFor='title' label='Title' type='text' textarea={false} id='title' name='title' />
-      <Input onChange={hadleInputChange} value={inputs.description}  htmlFor='description' label='Description' type='text' textarea={true} id='description' name='description' />
-      <Input onChange={hadleInputChange} value={inputs.date}  htmlFor='due-date' label='Due Date' type='text' textarea={false} id='due-date' name='date' />
+      <Input ref={titleElem} htmlFor='title' label='Title' type='text' textarea={false} id='title' name='title' />
+      <Input ref={descriptionElem} htmlFor='description' label='Description' textarea={true} id='description' name='description' />
+      <Input ref={dateElem} htmlFor='due-date' label='Due Date' type='date' textarea={false} id='due-date' name='date' />
     </div>
   </div>
 })

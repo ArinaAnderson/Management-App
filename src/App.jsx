@@ -17,7 +17,6 @@ function App() {
 
 
   const addProject = (prj) => {
-    // setMainState('add-project');
     setProjects((prev) => [...prev, prj]);
   };
 

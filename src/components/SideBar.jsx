@@ -10,8 +10,10 @@ function SideBar({ projects, changeCurrentAction }) {
         + Add Project
         </Button>
       </div>
-      <ul>
-        {projects.map(({title, id}) => <li key={id}><button>{title}</button></li>)}
+      <ul className="list-none mt-8 mx-0">
+        {projects.map(({title, id}) => <li key={id}>
+          <button className="w-full text-left px-2 py-1 m-1 rounded-sd bg-stone-900 text-stone-50 hover:bg-stone-100  hover:text-stone-800">{title}</button>
+        </li>)}
       </ul>
     </aside>
   );
