@@ -8,7 +8,7 @@ export default function NoProjectSelected({ changeCurrentAction }) {
     <h2 className="text-xl font-bold text-stone-500 my-4">No project Selected</h2>
     <p className="text-stone-400 mb-4">Select a project or get started with a new one</p>
     <p className="mt-4">
-      <Button onClick={() => changeCurrentAction('add-project')}>
+      <Button type="button" onClick={() => changeCurrentAction('add-project')}>
         Create new project
       </Button>
     </p>
