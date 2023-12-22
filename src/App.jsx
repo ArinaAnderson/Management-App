@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // import Project from './components/Project.jsx';
 import SideBar from './components/SideBar.jsx';
 import NoProjectSelected from './components/NoProjectSelected.jsx';
-import AddProjectPopup from './components/AddProjectPopup.jsx';
+import AddProjectSection from './components/AddProjectSection.jsx';
 
 function App() {
   const [projects, setProjects] = useState([
@@ -36,7 +36,7 @@ function App() {
       case 'no-project':
         return <NoProjectSelected changeCurrentAction={changeCurrentAction} />;
       case 'add-project':
-        return <AddProjectPopup addProject={addProject} changeCurrentAction={changeCurrentAction} />;
+        return <AddProjectSection addProject={addProject} changeCurrentAction={changeCurrentAction} />;
       default:
         throw new Error(`Unknown current action: '${currentAction}'!`);
     }
