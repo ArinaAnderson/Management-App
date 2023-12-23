@@ -26,11 +26,13 @@ function App() {
 
   const deleteProject = () => {
     changeCurrentAction('no-project');
+    /*
     const prjLocation = projects.findIndex((el) => el.id === activePrjId);
     const beforePrj = projects.slice(0, prjLocation);
     const afterPrj = projects.slice(prjLocation + 1);
     setProjects(beforePrj.concat(afterPrj));
-    console.log('FENYA', beforePrj, afterPrj);
+    */
+    setProjects(projects.filter((prj) => prj.id !== activePrjId));
     setActivePrjId(null);
   };
 

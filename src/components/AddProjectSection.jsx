@@ -97,8 +97,7 @@ const AddProjectSection = ({addProject, changeCurrentAction}) => {
     try {
       validateInputs(prjData);
       setFormState({ validationErrors: [], isValid: true });
-      const prjID = _.uniqueId()
-      addProject({...prjData, id: prjID});
+      addProject({ ...prjData, id: _.uniqueId() });
       changeCurrentAction('no-project');
     } catch (e) {
       console.log('BASYUNYA', e);
