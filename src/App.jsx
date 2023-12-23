@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useState, useEffect, useRef } from 'react';
-// import Project from './components/Project.jsx';
+import Project from './components/Project.jsx';
 import SideBar from './components/SideBar.jsx';
 import NoProjectSelected from './components/NoProjectSelected.jsx';
 import AddProjectSection from './components/AddProjectSection.jsx';
@@ -24,19 +24,24 @@ function App() {
     setCurrentAction(stateVal)
   };
 
-  const deleteProject = (prj) => {
-     const prjLocation = projects.findIndex((el) => el.id === prj.id);
+  const deleteProject = () => {
+    changeCurrentAction('no-project');
+    const prjLocation = projects.findIndex((el) => el.id === activePrjId);
     const beforePrj = projects.slice(0, prjLocation);
     const afterPrj = projects.slice(prjLocation + 1);
     setProjects(beforePrj.concat(afterPrj));
+    console.log('FENYA', beforePrj, afterPrj);
+    setActivePrjId(null);
   };
 
   const defineMainContent = () => {
     switch (currentAction) {
       case 'no-project':
-        return <NoProjectSelected changeCurrentAction={changeCurrentAction} />;
+        return <NoProjectSelected changeCurrentAction={changeCurrentAction} setActivePrjId={setActivePrjId} />;
       case 'add-project':
         return <AddProjectSection addProject={addProject} changeCurrentAction={changeCurrentAction} />;
+      case 'open-project':
+        return <Project activePrjId={activePrjId} projects={projects} deleteProject={deleteProject} changeCurrentAction={changeCurrentAction} />
       default:
         throw new Error(`Unknown current action: '${currentAction}'!`);
     }
@@ -45,7 +50,7 @@ function App() {
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <SideBar projects={projects} changeCurrentAction={changeCurrentAction} />
+        <SideBar activePrjId={activePrjId} projects={projects} changeCurrentAction={changeCurrentAction} setActivePrjId={setActivePrjId} />
         {defineMainContent()} 
       </main>
       

@@ -74,12 +74,14 @@ const AddProjectSection = ({addProject, changeCurrentAction}) => {
   };
 
   yup.setLocale({
+    /*
     string: {
       typeError: 'invalidString',
     },
     date: {
       typeError: 'InvalidDate',
     },
+    */
     mixed: {
       required: 'requiredInput',
     },
@@ -95,10 +97,11 @@ const AddProjectSection = ({addProject, changeCurrentAction}) => {
     try {
       validateInputs(prjData);
       setFormState({ validationErrors: [], isValid: true });
-      addProject({...prjData, id: _.uniqueId()});
+      const prjID = _.uniqueId()
+      addProject({...prjData, id: prjID});
       changeCurrentAction('no-project');
     } catch (e) {
-      // console.log('BASYUNYA', e.errors);
+      console.log('BASYUNYA', e);
       // console.log('BASYUNYA', e.inner[2].path, e.inner[2].message);
       // // y.push(e.inner[0].path, e.inner[0].message, e.inner[1].path, e.inner[1].message, e.inner[2].path, e.inner[2].message);
       const res =  e.inner.map((el) => ({path: el.path, message: el.message}));
