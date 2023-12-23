@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Tasks from './Tasks.jsx';
 
 function Project({activePrjId, projects, deleteProject}) {
   const [tasks, setTasks] = useState([]);
@@ -25,17 +26,7 @@ function Project({activePrjId, projects, deleteProject}) {
         <p className="mb-4 text-stone-600">{formattedDate}</p>
         <p className="text-stone-800 whitespace-pre-wrap">{activeProject.description}</p>
       </header>
-      <h2>Tasks</h2>
-      <div className="flex items-center gap-4">
-        <input className="w-64 px-2 py-1 rounded-sm bg-stone-200" />
-        <button className="text-stone-700 hover:text-stone-950">Add Task</button>
-      </div>
-
-      {tasks.length > 0 && (
-        <ul>
-
-        </ul>
-      )}
+      <Tasks />
     </div>
   );
 }  
