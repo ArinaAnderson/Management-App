@@ -15,6 +15,15 @@ function App() {
   const [activePrjId, setActivePrjId] = useState(null);
   const [currentAction, setCurrentAction] = useState('no-project');
 
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    setTasks((prev) => [...prev, task]);
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks((prev) => prev.filter((id) => id !== taskId));
+  };
 
   const addProject = (prj) => {
     setProjects((prev) => [...prev, prj]);
@@ -43,7 +52,14 @@ function App() {
       case 'add-project':
         return <AddProjectSection addProject={addProject} changeCurrentAction={changeCurrentAction} />;
       case 'open-project':
-        return <Project activePrjId={activePrjId} projects={projects} deleteProject={deleteProject} changeCurrentAction={changeCurrentAction} />
+        return <Project
+          projects={projects}
+          deleteProject={deleteProject}
+          tasks={tasks}
+          addTask={addTask}
+          deleteTask={deleteTask}
+          activePrjId={activePrjId}
+        />
       default:
         throw new Error(`Unknown current action: '${currentAction}'!`);
     }

@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useRef, useEffect } from 'react';
 import _ from 'lodash';
 
-export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
-
-  const inputElem = useRef(null);
+export default function Tasks({ tasks, addTask, deleteTask, activePrjId }) {
+  // const inputElem = useRef(null);
 
   /*
   const taskIdCount = useRef(null);
@@ -13,39 +11,42 @@ export default function Tasks() {
     taskIdCount.current = 0;
   }, []);
   */
+ /*
   useEffect(() => {
     inputElem.current.value = '';
   }, [tasks]);
+  */
+
+  const [taskInput, setTaskInput] = useState('');
 
   return (
     <section>
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
       <div className="flex items-center gap-4">
-        <input ref={inputElem} type="text" className="w-64 px-2 py-1 rounded-sm bg-stone-200" />
+        <input onChange={(e) => setTaskInput(e.target.value)} type="text" value={taskInput} className="w-64 px-2 py-1 rounded-sm bg-stone-200" />
         <button
           onClick={() => {
-            setTasks((prev) => {
-              // taskIdCount.current += 1;
-              console.log('SPIRAL', inputElem.current.value);
-              return [...prev, { text: inputElem.current.value, id: _.uniqueId() }];
+            addTask({
+              text: taskInput,
+              id: _.uniqueId(),
+              prjId: activePrjId,
             });
-            // inputElem.current.value ='';
-          }}
+            setTaskInput('');
+          }
+        }
           className="text-stone-700 hover:text-stone-950"
         >
           Add Task
         </button>
       </div>
-      <p className="text-stone-900 my-4">
-        This project does not have any tasks yet.
-      </p>
-      {tasks.length > 0 && (
-        <ul>
-          {tasks.map((task) => {
-            return <li key={task.id}>{task.text}</li>
+      {tasks.length === 0
+        ? <p className="text-stone-900 my-4">This project does not have any tasks yet.</p>
+        : <ul className="list-disc p-4">
+          {tasks.map(({text, id}) => {
+            return <li key={id}>{text}</li>
           })}
         </ul>
-      )}
+      }
     </section>
   );
 };

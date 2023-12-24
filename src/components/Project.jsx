@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Tasks from './Tasks.jsx';
 
-function Project({activePrjId, projects, deleteProject}) {
-  const [tasks, setTasks] = useState([]);
-
+function Project({ activePrjId, projects, deleteProject, tasks, addTask }) {
   const activeProject = projects.find((prj) => prj.id === activePrjId);
+  const currentTasks = tasks.filter(({prjId}) => prjId === activePrjId);
 
   const formattedDate = new Date(activeProject.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -26,7 +25,7 @@ function Project({activePrjId, projects, deleteProject}) {
         <p className="mb-4 text-stone-600">{formattedDate}</p>
         <p className="text-stone-800 whitespace-pre-wrap">{activeProject.description}</p>
       </header>
-      <Tasks />
+      <Tasks tasks={currentTasks} activePrjId={activePrjId} addTask={addTask} />
     </div>
   );
 }  
