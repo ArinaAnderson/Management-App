@@ -17,9 +17,12 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (task) => {
-    setTasks((prev) => [...prev, task]);
-  };
+  const addTask = (taskText) => setTasks((prev) => [...prev, {
+    text: taskText,
+    id: _.uniqueId(),
+    prjId: activePrjId,
+  }]);
+  //setTasks((prev) => [...prev, task]);
 
   const deleteTask = (taskId) => {
     setTasks((prev) => prev.filter((id) => id !== taskId));

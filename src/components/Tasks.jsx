@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRef, useEffect } from 'react';
 import _ from 'lodash';
 
-export default function Tasks({ tasks, addTask, deleteTask, activePrjId }) {
+export default function Tasks({ tasks, addTask, deleteTask }) {
   // const inputElem = useRef(null);
 
   /*
@@ -26,11 +26,7 @@ export default function Tasks({ tasks, addTask, deleteTask, activePrjId }) {
         <input onChange={(e) => setTaskInput(e.target.value)} type="text" value={taskInput} className="w-64 px-2 py-1 rounded-sm bg-stone-200" />
         <button
           onClick={() => {
-            addTask({
-              text: taskInput,
-              id: _.uniqueId(),
-              prjId: activePrjId,
-            });
+            addTask(taskInput);
             setTaskInput('');
           }
         }
